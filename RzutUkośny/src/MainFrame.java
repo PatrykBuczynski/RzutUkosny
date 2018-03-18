@@ -4,8 +4,8 @@ import java.awt.HeadlessException;
 import javax.swing.JFrame;
 
 public class MainFrame extends JFrame {
-	///
 
+//
 	public MainFrame() throws HeadlessException {
 		// TODO Auto-generated constructor stub
 	}
