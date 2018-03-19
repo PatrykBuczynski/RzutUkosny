@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
-	
+
 	LineEndPanel lineEnd;
 	CenterPanel center;
 	StartPageFrame frame;
