@@ -17,6 +17,7 @@ public class MainFrame extends JFrame {
 	LineEndPanel lineEnd;
 	CenterPanel center;
 	StartPageFrame frame;
+	AboutFrame creditsFrame;
 	JMenuBar menuBar;
 	JMenu menu;
 	JMenuItem importItem;
@@ -29,6 +30,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() throws HeadlessException {
 		// TODO Auto-generated constructor stub
 		this.setSize(1000,800);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		menuBar = new JMenuBar();
 		menu = new JMenu("Menu");
 		this.setJMenuBar(menuBar);
@@ -57,6 +59,13 @@ public class MainFrame extends JFrame {
 				
 				frame = new StartPageFrame();
 				MainFrame.this.dispose();
+			}
+		});
+		aboutItem.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				creditsFrame = new AboutFrame();
 			}
 		});
 	}
