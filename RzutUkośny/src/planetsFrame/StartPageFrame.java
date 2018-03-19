@@ -1,4 +1,4 @@
-package proba;
+package planetsFrame;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,16 +18,17 @@ public class StartPageFrame extends JFrame {
 	JButton marsButton;
 	JButton moonButton;
 	JButton newPlanetButton;
+	MainFrame planetFrame;
 	
 	public StartPageFrame() {
 		setSize(700,500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Symulacja rzutu ukoœnego");
+		setTitle("Symulacja rzutu ukoÅ›nego");
 		
 		earthButton= new JButton("Ziemia");
 		marsButton= new JButton("Mars");
-		moonButton= new JButton("Ksiê¿yc");
-		newPlanetButton= new JButton("Twoja w³asna planeta");
+		moonButton= new JButton("KsiÄ™Å¼yc");
+		newPlanetButton= new JButton("Twoja wÅ‚asna planeta");
 		
 		this.setLayout(new GridLayout(2,2));
 		this.add(earthButton);
@@ -39,6 +40,8 @@ public class StartPageFrame extends JFrame {
 		marsButton.addActionListener(new MarsButtonActionListener());
 		moonButton.addActionListener(new MoonButtonActionListener());
 		newPlanetButton.addActionListener(new NewPlanetButtonActionListener());
+		
+		this.setVisible(true);
 	}
 	
 	public class EarthButtonActionListener implements ActionListener {
@@ -73,12 +76,13 @@ public class StartPageFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
+			planetFrame = new MainFrame();
+			StartPageFrame.this.dispose();
 
 		}
 	}
 	
 	public static void main(String[] args) {
 		StartPageFrame frame= new StartPageFrame();
-		frame.setVisible(true);
 	}
 }
