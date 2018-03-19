@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
 
-	//////test
+	test
 	LineEndPanel lineEnd;
 	CenterPanel center;
 	StartPageFrame frame;
