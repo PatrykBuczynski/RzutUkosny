@@ -5,11 +5,16 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
@@ -24,11 +29,12 @@ public class MainFrame extends JFrame {
 	JMenuItem backItem;
 	JMenuItem aboutItem;
 	JMenuItem newItem;
-	
+	private BufferedImage image;
 	
 	public MainFrame() throws HeadlessException {
 		// TODO Auto-generated constructor stub
 		this.setSize(1000,800);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		menuBar = new JMenuBar();
 		menu = new JMenu("Menu");
 		this.setJMenuBar(menuBar);
@@ -57,6 +63,17 @@ public class MainFrame extends JFrame {
 				
 				frame = new StartPageFrame();
 				MainFrame.this.dispose();
+			}
+		});
+		aboutItem.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				URL resource = getClass().getResource("obrazki/logoFizyka.jpg");        
+		        String credits = "<img src=\"" + resource
+                        + "\" height=200 width=200>";
+				JOptionPane.showMessageDialog(MainFrame.this, "<html><center>" + credits  + "<br>Symulator rzutu ukośnego.</br><br></br><br><p align=\"justify\">"
+						+ "Program został przygotowany przez Patryka Buczyńskiego i Klaudie Echolc,</br><br> studentów Politechniki Warszawskiej"
+						+ " kierunku Fizyka Techniczna.</center></br></p></html>" , "Opis programu", JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 	}
