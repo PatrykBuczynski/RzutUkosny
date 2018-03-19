@@ -13,8 +13,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
-
-	test
+	
 	LineEndPanel lineEnd;
 	CenterPanel center;
 	StartPageFrame frame;
