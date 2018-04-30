@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -31,25 +33,30 @@ public class MainFrame extends JFrame {
 	JMenuItem newItem;
 	private BufferedImage image;
 	
-	public MainFrame() throws HeadlessException {
+    Locale currentLocale;
+    ResourceBundle messages;
+	
+	public MainFrame(Locale currentLocale) throws HeadlessException {
 		// TODO Auto-generated constructor stub
 		this.setSize(1000,800);
+		this.currentLocale = currentLocale;
+		messages = ResourceBundle.getBundle("lang/MessagesBundle", currentLocale);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		menuBar = new JMenuBar();
-		menu = new JMenu("Menu");
+		menu = new JMenu(messages.getString("menu"));
 		this.setJMenuBar(menuBar);
 		menuBar.add(menu);
-		importItem = new JMenuItem("Import");
-		exportItem = new JMenuItem("Export");
-		backItem = new JMenuItem ("Powrót");
-		aboutItem = new JMenuItem ("Opis programu");
-		newItem = new JMenuItem ("Nowa symulacja");
+		importItem = new JMenuItem(messages.getString("import"));
+		exportItem = new JMenuItem(messages.getString("export"));
+		backItem = new JMenuItem (messages.getString("back"));
+		aboutItem = new JMenuItem (messages.getString("about"));
+		newItem = new JMenuItem (messages.getString("new"));
 		menu.add(newItem);
 		menu.add(importItem);
 		menu.add(exportItem);
 		menu.add(aboutItem);
 		menu.add(backItem);
-		lineEnd = new LineEndPanel(this);
+		lineEnd = new LineEndPanel(this, currentLocale);
 		center = new CenterPanel(this);
 		
 		this.add(center, BorderLayout.CENTER);
@@ -61,7 +68,7 @@ public class MainFrame extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				frame = new StartPageFrame();
+				frame = new StartPageFrame(currentLocale);
 				MainFrame.this.dispose();
 			}
 		});
@@ -71,9 +78,7 @@ public class MainFrame extends JFrame {
 				URL resource = getClass().getResource("obrazki/logoFizyka.jpg");        
 		        String credits = "<img src=\"" + resource
                         + "\" height=200 width=200>";
-				JOptionPane.showMessageDialog(MainFrame.this, "<html><center>" + credits  + "<br>Symulator rzutu ukośnego.</br><br></br><br><p align=\"justify\">"
-						+ "Program został przygotowany przez Patryka Buczyńskiego i Klaudie Echolc,</br><br> studentów Politechniki Warszawskiej"
-						+ " kierunku Fizyka Techniczna.</center></br></p></html>" , "Opis programu", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(MainFrame.this, "<html><center>" + credits  + messages.getString("aboutdialog") , messages.getString("aboutdialogtitle"), JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 	}
