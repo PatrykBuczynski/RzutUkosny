@@ -77,15 +77,56 @@ public class LineEndPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				double velocity = Double.parseDouble(velocityTextField.getText());
-				double acceleration = Double.parseDouble(accelerationTextField.getText());
-				double angle = Double.parseDouble(angleTextField.getText());
-				double airResistance = Double.parseDouble(airResistanceTextField.getText());
-				double mass = Double.parseDouble(massTextField.getText());
-				trajectory = new TrajectoryClass(acceleration, angle, mass, velocity, airResistance, frame);
-				trajectoryIsPresent = true;
-				activationButton.setEnabled(false);
-				trajectory.calculate();
+				
+				if(!trajectoryIsPresent) {
+					double velocity = Double.parseDouble(velocityTextField.getText());
+					double acceleration = Double.parseDouble(accelerationTextField.getText());
+					double angle = Double.parseDouble(angleTextField.getText());
+					double airResistance = Double.parseDouble(airResistanceTextField.getText());
+					double mass = Double.parseDouble(massTextField.getText());
+					if(frame.choice == 4) {
+						velocityLabel.setEnabled(false);
+						massLabel.setEnabled(false);
+						angleLabel.setEnabled(false);
+						airResistanceLabel.setEnabled(false);
+						accelerationLabel.setEnabled(false);
+						velocityTextField.setEnabled(false);
+						massTextField.setEnabled(false);
+						accelerationTextField.setEnabled(false);
+						angleTextField.setEnabled(false);
+						airResistanceTextField.setEnabled(false);
+					}
+					else {
+						if(frame.choice == 3) {
+							velocityLabel.setEnabled(false);
+							massLabel.setEnabled(false);
+							angleLabel.setEnabled(false);
+							velocityTextField.setEnabled(false);
+							massTextField.setEnabled(false);
+							angleTextField.setEnabled(false);
+						}
+						else {
+							velocityLabel.setEnabled(false);
+							massLabel.setEnabled(false);
+							angleLabel.setEnabled(false);
+							airResistanceLabel.setEnabled(false);
+							velocityTextField.setEnabled(false);
+							massTextField.setEnabled(false);
+							angleTextField.setEnabled(false);
+							airResistanceTextField.setEnabled(false);
+						}
+					}
+					trajectory = new TrajectoryClass(acceleration, angle, mass, velocity, airResistance, frame);
+					trajectoryIsPresent = true;
+					isON = true;
+					trajectory.calculate();
+				}
+				else {
+					if(isON) {
+						trajectory.getWorker().cancel(true);
+					}
+
+				}
 				
 			}
 			
@@ -162,6 +203,8 @@ public class LineEndPanel extends JPanel {
 	JButton activationButton;
 	TrajectoryClass trajectory;
 	boolean trajectoryIsPresent = false;
+	boolean isON = false;
+	boolean isChart = false;
 	
     Locale currentLocale = new Locale("pl", "PL");
     ResourceBundle messages;
