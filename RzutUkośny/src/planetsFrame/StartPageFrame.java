@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 
 
@@ -69,12 +70,13 @@ public class StartPageFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			currentLocale = new Locale("en", "ENG");
-			messages = ResourceBundle.getBundle("lang/MessagesBundle", currentLocale);
-			earthButton.setText(messages.getString("earth"));
-			marsButton.setText(messages.getString("mars"));
-			moonButton.setText(messages.getString("moon"));
-			newPlanetButton.setText(messages.getString("newplanet"));
+			double mass = 10;
+			double acceleration = 9.81;
+			double angle = 45;
+			double velocity = 10;
+			double airResistance = 8;
+			int choice = 1;
+			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 
 		}
 	}
@@ -84,6 +86,13 @@ public class StartPageFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
+			double mass = 10;
+			double acceleration = 3.7;
+			double angle = 45;
+			double velocity = 10;
+			double airResistance = 10;
+			int choice = 2;
+			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 
 		}
 	}
@@ -93,6 +102,13 @@ public class StartPageFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
+			double mass = 10;
+			double acceleration = 1.62;
+			double angle = 45;
+			double velocity = 10;
+			double airResistance = 0.0001;
+			int choice = 3;
+			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 
 		}
 	}
@@ -102,7 +118,13 @@ public class StartPageFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			planetFrame = new MainFrame(currentLocale);
+			double mass = 0;
+			double acceleration = 0;
+			double angle = 0;
+			double velocity = 0;
+			double airResistance = 0;
+			int choice = 4;
+			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 			StartPageFrame.this.dispose();
 
 		}
@@ -137,6 +159,17 @@ public class StartPageFrame extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		StartPageFrame frame= new StartPageFrame(new Locale("pl", "PL"));
+		
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				StartPageFrame frame= new StartPageFrame(new Locale("pl", "PL"));
+				
+			}
+			
+		});
+		
 	}
 }

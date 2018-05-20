@@ -34,15 +34,25 @@ public class LineEndPanel extends JPanel {
 		angleLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		accelerationLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		airResistanceLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		accelerationTextField = new JTextField("" + 0);
+		accelerationTextField = new JTextField("" + frame.acceleration);
 	    accelerationTextField.setHorizontalAlignment(JTextField.CENTER);
-		massTextField = new JTextField("" + 0);
+		massTextField = new JTextField("" + frame.mass);
 		massTextField.setHorizontalAlignment(JTextField.CENTER);
-		angleTextField = new JTextField("" + 0);
+		angleTextField = new JTextField("" + frame.angle);
+		angleTextField.setToolTipText(messages.getString("angleHint"));
 		angleTextField.setHorizontalAlignment(JTextField.CENTER);
-		velocityTextField = new JTextField("" + 0);
+		velocityTextField = new JTextField("" + frame.velocity);
 		velocityTextField.setHorizontalAlignment(JTextField.CENTER);
-		airResistanceTextField = new JTextField("" + 0);
+		airResistanceTextField = new JTextField("" + frame.airResistance);
+		
+		if(frame.choice < 4) {
+			accelerationTextField.setEnabled(false);
+			accelerationLabel.setEnabled(false);
+		}
+		if(frame.choice == 3) {
+			airResistanceLabel.setEnabled(false);
+			airResistanceTextField.setEnabled(false);
+		}
 		airResistanceTextField.setHorizontalAlignment(JTextField.CENTER);
 		colorChangeButton = new JButton(messages.getString("colorchange"));
 		activationButton = new JButton(messages.getString("activationButton"));
@@ -55,7 +65,30 @@ public class LineEndPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Color newColor = JColorChooser.showDialog(null,"Choose Color",frame.center.getBackground());
 				frame.center.setBackground(newColor);
+				if(trajectoryIsPresent) {
+					trajectory.setChartColor(newColor);
+					trajectory.recolorChart();
+				}
+				
 			}
+		});
+		activationButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				double velocity = Double.parseDouble(velocityTextField.getText());
+				double acceleration = Double.parseDouble(accelerationTextField.getText());
+				double angle = Double.parseDouble(angleTextField.getText());
+				double airResistance = Double.parseDouble(airResistanceTextField.getText());
+				double mass = Double.parseDouble(massTextField.getText());
+				trajectory = new TrajectoryClass(acceleration, angle, mass, velocity, airResistance, frame);
+				trajectoryIsPresent = true;
+				activationButton.setEnabled(false);
+				trajectory.calculate();
+				
+			}
+			
 		});
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -127,6 +160,8 @@ public class LineEndPanel extends JPanel {
 	JTextField airResistanceTextField;
 	JButton colorChangeButton;
 	JButton activationButton;
+	TrajectoryClass trajectory;
+	boolean trajectoryIsPresent = false;
 	
     Locale currentLocale = new Locale("pl", "PL");
     ResourceBundle messages;

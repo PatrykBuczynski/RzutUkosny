@@ -19,11 +19,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.jfree.chart.ChartPanel;
+
 public class MainFrame extends JFrame {
 
 	LineEndPanel lineEnd;
 	CenterPanel center;
 	StartPageFrame frame;
+	ChartPanel trajectoryPanel;
 	JMenuBar menuBar;
 	JMenu menu;
 	JMenuItem importItem;
@@ -35,11 +38,24 @@ public class MainFrame extends JFrame {
 	
     Locale currentLocale;
     ResourceBundle messages;
+    
+    double acceleration;
+    double mass;
+    double velocity;
+    double angle;
+    double airResistance;
+    int choice;
 	
-	public MainFrame(Locale currentLocale) throws HeadlessException {
+	public MainFrame(Locale currentLocale, double acceleration, double mass, double velocity, double angle, double airResistance, int choice) throws HeadlessException {
 		// TODO Auto-generated constructor stub
 		this.setSize(1000,800);
 		this.currentLocale = currentLocale;
+		this.acceleration = acceleration;
+		this.mass = mass;
+		this.velocity = velocity;
+		this.angle = angle;
+		this.airResistance = airResistance;
+		this.choice = choice;
 		messages = ResourceBundle.getBundle("lang/MessagesBundle", currentLocale);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		menuBar = new JMenuBar();
