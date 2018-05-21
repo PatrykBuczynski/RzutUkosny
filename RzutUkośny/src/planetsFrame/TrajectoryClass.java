@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+
 import javax.swing.SwingWorker;
 
 import org.jfree.chart.ChartFactory;
@@ -28,8 +29,8 @@ public class TrajectoryClass {
 	private double yVelocity;
 	private double ksi;
 	private double eta;
-	private ArrayList <Double> xPosition;
-	private ArrayList <Double> yPosition;
+	private static ArrayList <Double> xPosition;
+	private static ArrayList <Double> yPosition;
 	private MainFrame frame;
 	private SwingWorker<Void, ChartPanel> worker;
 	private JFreeChart chart;
@@ -38,7 +39,9 @@ public class TrajectoryClass {
 	Locale currentLocale;
 	ResourceBundle messages;
 
+
 	public TrajectoryClass(double acceleration, double angle, double mass, double velocity, double airResistance, MainFrame frame, Locale currentLocale) {
+
 		// TODO Auto-generated constructor stub
 		
 		this.acceleration = acceleration;
@@ -58,7 +61,7 @@ public class TrajectoryClass {
 		xPosition.add(0.0);
 		yPosition.add(0.0);
 		eta = this.acceleration/(betaFactor*betaFactor); // zastosowano podstawienie w celu uproszczenia wzoru
-
+		
 	}
 	public void calculate() {
 		
@@ -97,14 +100,24 @@ public class TrajectoryClass {
 					}
 					
 					series.add(xPosition.get(xPosition.size() - 1), yPosition.get(yPosition.size() - 1));
+					
+					
 					System.out.println(xPosition.get(xPosition.size() - 1) + ", " + yPosition.get(yPosition.size() - 1));
 					frame.validate();
 					Thread.sleep(1);
 					
+					
+					
 				} while(yPosition.get(yPosition.size() - 1) > 0);
 				
+				
+				
+				
 				return null;
+				
+				
 			}
+			
 			@Override
 			protected void done() {
 	
@@ -161,6 +174,14 @@ public class TrajectoryClass {
 		return worker;
 		
 	}
-
+	public static ArrayList <Double> getxPosition(){
+		return xPosition;
+		
+	}
+	public static ArrayList <Double> getyPosition(){
+		return yPosition;
+		
+	}
+	
 
 }

@@ -24,6 +24,7 @@ public class StartPageFrame extends JFrame {
 	JButton plLangButton;
 	JButton engLangButton;
 	
+	
     Locale currentLocale;
     ResourceBundle messages;
 	
