@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame(Locale currentLocale, double acceleration, double mass, double velocity, double angle, double airResistance, int choice) throws HeadlessException {
 		// TODO Auto-generated constructor stub
-		this.setSize(1000,800);
+		this.setSize(900, 700);
 		this.currentLocale = currentLocale;
 		this.acceleration = acceleration;
 		this.mass = mass;
