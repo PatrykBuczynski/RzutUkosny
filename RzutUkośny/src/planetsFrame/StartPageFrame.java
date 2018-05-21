@@ -24,6 +24,7 @@ public class StartPageFrame extends JFrame {
 	JButton plLangButton;
 	JButton engLangButton;
 	
+	
     Locale currentLocale;
     ResourceBundle messages;
 	
@@ -77,7 +78,7 @@ public class StartPageFrame extends JFrame {
 			double airResistance = 8;
 			int choice = 1;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
-
+			StartPageFrame.this.dispose();
 		}
 	}
 	
@@ -93,7 +94,7 @@ public class StartPageFrame extends JFrame {
 			double airResistance = 10;
 			int choice = 2;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
-
+			StartPageFrame.this.dispose();
 		}
 	}
 	
@@ -109,7 +110,7 @@ public class StartPageFrame extends JFrame {
 			double airResistance = 0.0001;
 			int choice = 3;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
-
+			StartPageFrame.this.dispose();
 		}
 	}
 	

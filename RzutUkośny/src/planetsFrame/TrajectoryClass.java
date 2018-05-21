@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 
+
 import javax.swing.SwingWorker;
 
 import org.jfree.chart.ChartFactory;
@@ -26,11 +27,14 @@ public class TrajectoryClass {
 	private double yVelocity;
 	private double ksi;
 	private double eta;
-	private ArrayList <Double> xPosition;
-	private ArrayList <Double> yPosition;
+	private static ArrayList <Double> xPosition;
+	private static ArrayList <Double> yPosition;
 	private MainFrame frame;
 	JFreeChart chart;
 	private Color chartColor = null;
+
+	
+	
 
 	public TrajectoryClass(double acceleration, double angle, double mass, double velocity, double airResistance, MainFrame frame) {
 		// TODO Auto-generated constructor stub
@@ -49,7 +53,7 @@ public class TrajectoryClass {
 		xPosition.add(0.0);
 		yPosition.add(0.0);
 		eta = this.acceleration/(betaFactor*betaFactor); // zastosowano podstawienie w celu uproszczenia wzoru
-
+		
 	}
 	public void calculate() {
 		
@@ -88,14 +92,24 @@ public class TrajectoryClass {
 					}
 					
 					series.add(xPosition.get(xPosition.size() - 1), yPosition.get(yPosition.size() - 1));
+					
+					
 					System.out.println(xPosition.get(xPosition.size() - 1) + ", " + yPosition.get(yPosition.size() - 1));
 					frame.validate();
 					Thread.sleep(1);
 					
+					
+					
 				} while(yPosition.get(yPosition.size() - 1) > 0);
 				
+				
+				
+				
 				return null;
+				
+				
 			}
+			
 			@Override
 			protected void done() {
 				frame.lineEnd.activationButton.setEnabled(true);
@@ -114,6 +128,14 @@ public class TrajectoryClass {
 	public void recolorChart() {
 		chart.getPlot().setBackgroundPaint(chartColor);
 	}
-
+	public static ArrayList <Double> getxPosition(){
+		return xPosition;
+		
+	}
+	public static ArrayList <Double> getyPosition(){
+		return yPosition;
+		
+	}
+	
 
 }

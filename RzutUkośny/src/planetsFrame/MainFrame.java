@@ -6,12 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -34,7 +39,9 @@ public class MainFrame extends JFrame {
 	JMenuItem backItem;
 	JMenuItem aboutItem;
 	JMenuItem newItem;
+	JFileChooser chooser;
 	private BufferedImage image;
+	
 	
     Locale currentLocale;
     ResourceBundle messages;
@@ -75,6 +82,7 @@ public class MainFrame extends JFrame {
 		lineEnd = new LineEndPanel(this, currentLocale);
 		center = new CenterPanel(this);
 		
+		
 		this.add(center, BorderLayout.CENTER);
 		this.add(lineEnd, BorderLayout.LINE_END);
 		
@@ -88,6 +96,40 @@ public class MainFrame extends JFrame {
 				MainFrame.this.dispose();
 			}
 		});
+		
+		exportItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				chooser = new JFileChooser();
+				
+				int returnVal = chooser.showOpenDialog(null);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					File file = chooser.getSelectedFile();
+					try {
+						FileWriter fw = new FileWriter(file);
+						BufferedWriter bw = new BufferedWriter(fw);
+						int sz = TrajectoryClass.getxPosition().size();
+						bw.write("xPosition || yPositition");
+						bw.newLine();
+						for(int i=0; i<sz; i++) {
+							bw.write(TrajectoryClass.getxPosition().get(i).toString() + " || " + TrajectoryClass.getyPosition().get(i).toString());
+							bw.newLine();
+						}
+						//String text=  dfedfef
+						//bw.write(text);
+						bw.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+					
+						}
+					
+				}		
+				
+			}
+		});
+		
 		aboutItem.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
