@@ -116,16 +116,13 @@ public class LineEndPanel extends JPanel {
 							airResistanceTextField.setEnabled(false);
 						}
 					}
-					trajectory = new TrajectoryClass(acceleration, angle, mass, velocity, airResistance, frame);
+					trajectory = new TrajectoryClass(acceleration, angle, mass, velocity, airResistance, frame, frame.currentLocale);
 					trajectoryIsPresent = true;
-					isON = true;
+
 					trajectory.calculate();
 				}
 				else {
-					if(isON) {
-						trajectory.getWorker().cancel(true);
-					}
-
+					trajectory.getWorker().cancel(true);
 				}
 				
 			}
