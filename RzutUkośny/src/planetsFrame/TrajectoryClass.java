@@ -3,6 +3,8 @@ package planetsFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 import javax.swing.SwingWorker;
@@ -30,20 +32,26 @@ public class TrajectoryClass {
 	private static ArrayList <Double> xPosition;
 	private static ArrayList <Double> yPosition;
 	private MainFrame frame;
-	JFreeChart chart;
+	private SwingWorker<Void, ChartPanel> worker;
+	private JFreeChart chart;
+	private ChartPanel panel;
 	private Color chartColor = null;
+	Locale currentLocale;
+	ResourceBundle messages;
 
-	
-	
 
-	public TrajectoryClass(double acceleration, double angle, double mass, double velocity, double airResistance, MainFrame frame) {
+	public TrajectoryClass(double acceleration, double angle, double mass, double velocity, double airResistance, MainFrame frame, Locale currentLocale) {
+
 		// TODO Auto-generated constructor stub
+		
 		this.acceleration = acceleration;
 		this.angle = angle;
 		this.mass = mass;
 		this.velocity = velocity;
 		this.airResistance = airResistance;
 		this.frame = frame;
+		this.currentLocale = currentLocale;
+		messages = ResourceBundle.getBundle("lang/MessagesBundle", currentLocale);
 		angleInRad = Math.toRadians(angle);
 		betaFactor = airResistance/mass;
 		xVelocity = velocity * Math.cos(angleInRad);
@@ -57,26 +65,26 @@ public class TrajectoryClass {
 	}
 	public void calculate() {
 		
-		XYSeries series = new XYSeries("Nazwa serii");
+		XYSeries series = new XYSeries(messages.getString("data"));
 		XYSeriesCollection dataset = new XYSeriesCollection();
 		dataset.addSeries(series);
 		chart = ChartFactory.createXYLineChart(
-			"Trajekoria lotu ciała",//Tytul
-			"Położenie x", // opisy osi
-			"Położenie y", 
+				messages.getString("charttitle"),//Tytul
+				messages.getString("xaxis"), // opisy osi
+				messages.getString("yaxis"), 
 			dataset, // Dane 
 			PlotOrientation.VERTICAL, // Orjentacja wykresu /HORIZONTAL
 			false, // legenda
-			false, // tooltips
+			true, // tooltips
 			false
 		);
-		ChartPanel panel = new ChartPanel(chart);
+		panel = new ChartPanel(chart);
 		chart.getPlot().setBackgroundPaint(chartColor);
 		frame.remove(frame.center);
 		frame.add(panel, BorderLayout.CENTER);
 		series.add(0, 0);
 
-		SwingWorker<Void, ChartPanel> worker = new SwingWorker<Void, ChartPanel>(){
+		worker = new SwingWorker<Void, ChartPanel>(){
 
 			@Override
 			protected Void doInBackground() throws Exception {
@@ -112,7 +120,39 @@ public class TrajectoryClass {
 			
 			@Override
 			protected void done() {
-				frame.lineEnd.activationButton.setEnabled(true);
+	
+				if(frame.choice == 4) {
+					frame.lineEnd.velocityLabel.setEnabled(true);
+					frame.lineEnd.massLabel.setEnabled(true);
+					frame.lineEnd.angleLabel.setEnabled(true);
+					frame.lineEnd.airResistanceLabel.setEnabled(true);
+					frame.lineEnd.accelerationLabel.setEnabled(true);
+					frame.lineEnd.velocityTextField.setEnabled(true);
+					frame.lineEnd.massTextField.setEnabled(true);
+					frame.lineEnd.accelerationTextField.setEnabled(true);
+					frame.lineEnd.angleTextField.setEnabled(true);
+					frame.lineEnd.airResistanceTextField.setEnabled(true);
+				}
+				else {
+					if(frame.choice == 3) {
+						frame.lineEnd.velocityLabel.setEnabled(true);
+						frame.lineEnd.massLabel.setEnabled(true);
+						frame.lineEnd.angleLabel.setEnabled(true);
+						frame.lineEnd.velocityTextField.setEnabled(true);
+						frame.lineEnd.massTextField.setEnabled(true);
+						frame.lineEnd.angleTextField.setEnabled(true);
+					}
+					else {
+						frame.lineEnd.velocityLabel.setEnabled(true);
+						frame.lineEnd.massLabel.setEnabled(true);
+						frame.lineEnd.angleLabel.setEnabled(true);
+						frame.lineEnd.airResistanceLabel.setEnabled(true);
+						frame.lineEnd.velocityTextField.setEnabled(true);
+						frame.lineEnd.massTextField.setEnabled(true);
+						frame.lineEnd.angleTextField.setEnabled(true);
+						frame.lineEnd.airResistanceTextField.setEnabled(true);
+					}
+				}
 			}
 			
 			
@@ -127,6 +167,12 @@ public class TrajectoryClass {
 	}
 	public void recolorChart() {
 		chart.getPlot().setBackgroundPaint(chartColor);
+		panel.revalidate();
+		
+	}
+	public SwingWorker<Void, ChartPanel> getWorker() {
+		return worker;
+		
 	}
 	public static ArrayList <Double> getxPosition(){
 		return xPosition;

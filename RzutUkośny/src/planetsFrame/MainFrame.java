@@ -55,7 +55,7 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame(Locale currentLocale, double acceleration, double mass, double velocity, double angle, double airResistance, int choice) throws HeadlessException {
 		// TODO Auto-generated constructor stub
-		this.setSize(1000,800);
+		this.setSize(900, 700);
 		this.currentLocale = currentLocale;
 		this.acceleration = acceleration;
 		this.mass = mass;
@@ -65,6 +65,7 @@ public class MainFrame extends JFrame {
 		this.choice = choice;
 		messages = ResourceBundle.getBundle("lang/MessagesBundle", currentLocale);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setTitle(messages.getString("title"));
 		menuBar = new JMenuBar();
 		menu = new JMenu(messages.getString("menu"));
 		this.setJMenuBar(menuBar);
@@ -87,6 +88,52 @@ public class MainFrame extends JFrame {
 		this.add(lineEnd, BorderLayout.LINE_END);
 		
 		this.setVisible(true);
+		newItem.addActionListener(new ActionListener() {
+
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if(MainFrame.this.choice == 1) {
+					double mass = 10;
+					double acceleration = 9.81;
+					double angle = 45;
+					double velocity = 10;
+					double airResistance = 8;
+					final int choice = 1;
+					MainFrame planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
+				}
+				if(MainFrame.this.choice == 2) {
+					double mass = 10;
+					double acceleration = 3.7;
+					double angle = 45;
+					double velocity = 10;
+					double airResistance = 10;
+					final int choice = 2;
+					MainFrame planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
+				}
+				if(MainFrame.this.choice == 3) {
+					double mass = 10;
+					double acceleration = 1.62;
+					double angle = 45;
+					double velocity = 10;
+					double airResistance = 0.0001;
+					final int choice = 3;
+					MainFrame planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
+				}
+				if(MainFrame.this.choice == 4) {
+					double mass = 10;
+					double acceleration = 1.62;
+					double angle = 45;
+					double velocity = 10;
+					double airResistance = 0.0001;
+					final int choice = 3;
+					MainFrame planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
+				}
+				MainFrame.this.dispose();
+			}
+			
+		});
 		
 		backItem.addActionListener(new ActionListener() {
 			
