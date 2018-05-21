@@ -30,9 +30,9 @@ public class StartPageFrame extends JFrame {
 	public StartPageFrame(Locale currentLocale) {
 		setSize(700,500);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Symulacja rzutu ukośnego");
 		this.currentLocale = currentLocale;
 		messages = ResourceBundle.getBundle("lang/MessagesBundle", currentLocale);
+		setTitle(messages.getString("title"));
 		
 		earthButton= new JButton(messages.getString("earth"));
 		marsButton= new JButton(messages.getString("mars"));
@@ -77,7 +77,7 @@ public class StartPageFrame extends JFrame {
 			double airResistance = 8;
 			final int choice = 1;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
-
+			StartPageFrame.this.dispose();
 		}
 	}
 	
@@ -93,7 +93,7 @@ public class StartPageFrame extends JFrame {
 			double airResistance = 10;
 			final int choice = 2;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
-
+			StartPageFrame.this.dispose();
 		}
 	}
 	
@@ -109,7 +109,7 @@ public class StartPageFrame extends JFrame {
 			double airResistance = 0.0001;
 			final int choice = 3;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
-
+			StartPageFrame.this.dispose();
 		}
 	}
 	
@@ -140,6 +140,7 @@ public class StartPageFrame extends JFrame {
 			marsButton.setText(messages.getString("mars"));
 			moonButton.setText(messages.getString("moon"));
 			newPlanetButton.setText(messages.getString("newplanet"));
+			setTitle(messages.getString("title"));
 
 		}
 	}
@@ -154,6 +155,7 @@ public class StartPageFrame extends JFrame {
 			marsButton.setText(messages.getString("mars"));
 			moonButton.setText(messages.getString("moon"));
 			newPlanetButton.setText(messages.getString("newplanet"));
+			setTitle(messages.getString("title"));
 
 		}
 	}
