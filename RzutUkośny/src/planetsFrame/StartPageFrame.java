@@ -75,7 +75,7 @@ public class StartPageFrame extends JFrame {
 			double angle = 45;
 			double velocity = 10;
 			double airResistance = 8;
-			int choice = 1;
+			final int choice = 1;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 
 		}
@@ -91,7 +91,7 @@ public class StartPageFrame extends JFrame {
 			double angle = 45;
 			double velocity = 10;
 			double airResistance = 10;
-			int choice = 2;
+			final int choice = 2;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 
 		}
@@ -107,7 +107,7 @@ public class StartPageFrame extends JFrame {
 			double angle = 45;
 			double velocity = 10;
 			double airResistance = 0.0001;
-			int choice = 3;
+			final int choice = 3;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 
 		}
@@ -123,7 +123,7 @@ public class StartPageFrame extends JFrame {
 			double angle = 0;
 			double velocity = 0;
 			double airResistance = 0;
-			int choice = 4;
+			final int choice = 4;
 			planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 			StartPageFrame.this.dispose();
 

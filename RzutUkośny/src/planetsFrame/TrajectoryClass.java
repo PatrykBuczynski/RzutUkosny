@@ -29,7 +29,8 @@ public class TrajectoryClass {
 	private ArrayList <Double> xPosition;
 	private ArrayList <Double> yPosition;
 	private MainFrame frame;
-	JFreeChart chart;
+	private SwingWorker<Void, ChartPanel> worker;
+	private JFreeChart chart;
 	private Color chartColor = null;
 
 	public TrajectoryClass(double acceleration, double angle, double mass, double velocity, double airResistance, MainFrame frame) {
@@ -72,7 +73,7 @@ public class TrajectoryClass {
 		frame.add(panel, BorderLayout.CENTER);
 		series.add(0, 0);
 
-		SwingWorker<Void, ChartPanel> worker = new SwingWorker<Void, ChartPanel>(){
+		worker = new SwingWorker<Void, ChartPanel>(){
 
 			@Override
 			protected Void doInBackground() throws Exception {
@@ -98,7 +99,40 @@ public class TrajectoryClass {
 			}
 			@Override
 			protected void done() {
-				frame.lineEnd.activationButton.setEnabled(true);
+	
+				frame.lineEnd.trajectoryIsPresent = false;
+				if(frame.choice == 4) {
+					frame.lineEnd.velocityLabel.setEnabled(true);
+					frame.lineEnd.massLabel.setEnabled(true);
+					frame.lineEnd.angleLabel.setEnabled(true);
+					frame.lineEnd.airResistanceLabel.setEnabled(true);
+					frame.lineEnd.accelerationLabel.setEnabled(true);
+					frame.lineEnd.velocityTextField.setEnabled(true);
+					frame.lineEnd.massTextField.setEnabled(true);
+					frame.lineEnd.accelerationTextField.setEnabled(true);
+					frame.lineEnd.angleTextField.setEnabled(true);
+					frame.lineEnd.airResistanceTextField.setEnabled(true);
+				}
+				else {
+					if(frame.choice == 3) {
+						frame.lineEnd.velocityLabel.setEnabled(true);
+						frame.lineEnd.massLabel.setEnabled(true);
+						frame.lineEnd.angleLabel.setEnabled(true);
+						frame.lineEnd.velocityTextField.setEnabled(true);
+						frame.lineEnd.massTextField.setEnabled(true);
+						frame.lineEnd.angleTextField.setEnabled(true);
+					}
+					else {
+						frame.lineEnd.velocityLabel.setEnabled(true);
+						frame.lineEnd.massLabel.setEnabled(true);
+						frame.lineEnd.angleLabel.setEnabled(true);
+						frame.lineEnd.airResistanceLabel.setEnabled(true);
+						frame.lineEnd.velocityTextField.setEnabled(true);
+						frame.lineEnd.massTextField.setEnabled(true);
+						frame.lineEnd.angleTextField.setEnabled(true);
+						frame.lineEnd.airResistanceTextField.setEnabled(true);
+					}
+				}
 			}
 			
 			
@@ -113,6 +147,10 @@ public class TrajectoryClass {
 	}
 	public void recolorChart() {
 		chart.getPlot().setBackgroundPaint(chartColor);
+	}
+	public SwingWorker<Void, ChartPanel> getWorker() {
+		return worker;
+		
 	}
 
 
