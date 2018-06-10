@@ -63,9 +63,8 @@ public class LineEndPanel extends JPanel {
 			
 			
 			public void actionPerformed(ActionEvent e) {
-				Color newColor = JColorChooser.showDialog(null,"Choose Color",frame.center.getBackground());
-				frame.center.setBackground(newColor);
 				if(trajectoryIsPresent) {
+					Color newColor = JColorChooser.showDialog(null,"Choose Color",trajectory.getChartColor());
 					trajectory.setChartColor(newColor);
 					trajectory.recolorChart();
 				}
@@ -122,7 +121,13 @@ public class LineEndPanel extends JPanel {
 					trajectory.calculate();
 				}
 				else {
-					trajectory.getWorker().cancel(true);
+					if(trajectory.getIsCanceled() == false) {
+						trajectory.getWorker().cancel(true);
+						trajectory.setIsCanceled(true);
+					}
+					else {
+						trajectory.calculate();
+					}
 				}
 				
 			}
