@@ -29,7 +29,7 @@ import org.jfree.chart.ChartPanel;
 public class MainFrame extends JFrame {
 
 	LineEndPanel lineEnd;
-	CenterPanel center;
+	//CenterPanel center;
 	StartPageFrame frame;
 	ChartPanel trajectoryPanel;
 	JMenuBar menuBar;
@@ -81,10 +81,10 @@ public class MainFrame extends JFrame {
 		menu.add(aboutItem);
 		menu.add(backItem);
 		lineEnd = new LineEndPanel(this, currentLocale);
-		center = new CenterPanel(this);
+		//center = new CenterPanel(this);
 		
 		
-		this.add(center, BorderLayout.CENTER);
+		//this.add(center, BorderLayout.CENTER);
 		this.add(lineEnd, BorderLayout.LINE_END);
 		
 		this.setVisible(true);
@@ -164,8 +164,6 @@ public class MainFrame extends JFrame {
 							bw.write(TrajectoryClass.getxPosition().get(i).toString() + " || " + TrajectoryClass.getyPosition().get(i).toString());
 							bw.newLine();
 						}
-						//String text=  dfedfef
-						//bw.write(text);
 						bw.close();
 						} catch (IOException e) {
 							e.printStackTrace();
