@@ -2,6 +2,7 @@ package planetsFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -33,7 +34,7 @@ public class TrajectoryClass {
 	private static ArrayList <Double> yPosition;
 	private MainFrame frame;
 	private SwingWorker<Void, ChartPanel> worker;
-	private JFreeChart chart;
+	static JFreeChart chart;
 	private ChartPanel panel;
 	private XYSeries series;
 	private XYSeriesCollection dataset;
@@ -279,6 +280,7 @@ public class TrajectoryClass {
 	public void setIsCanceled(boolean newBoolean) {
 		isCanceled = newBoolean;
 	}
+	
 	
 
 }

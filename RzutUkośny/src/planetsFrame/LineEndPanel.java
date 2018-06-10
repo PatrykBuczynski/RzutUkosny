@@ -196,11 +196,11 @@ public class LineEndPanel extends JPanel {
 	JLabel angleLabel;
 	JLabel velocityLabel;
 	JLabel airResistanceLabel;
-	JTextField accelerationTextField;
-	JTextField massTextField;
-	JTextField angleTextField;
-	JTextField velocityTextField;
-	JTextField airResistanceTextField;
+	static JTextField accelerationTextField;
+	static JTextField massTextField;
+	static JTextField angleTextField;
+	static JTextField velocityTextField;
+	static JTextField airResistanceTextField;
 	JButton colorChangeButton;
 	JButton activationButton;
 	TrajectoryClass trajectory;
