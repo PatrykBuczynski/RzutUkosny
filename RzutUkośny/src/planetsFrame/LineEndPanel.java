@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -78,47 +79,56 @@ public class LineEndPanel extends JPanel {
 				// TODO Auto-generated method stub
 				
 				if(!trajectoryIsPresent) {
-					double velocity = Double.parseDouble(velocityTextField.getText());
-					double acceleration = Double.parseDouble(accelerationTextField.getText());
-					double angle = Double.parseDouble(angleTextField.getText());
-					double airResistance = Double.parseDouble(airResistanceTextField.getText());
-					double mass = Double.parseDouble(massTextField.getText());
-					if(frame.choice == 4) {
-						velocityLabel.setEnabled(false);
-						massLabel.setEnabled(false);
-						angleLabel.setEnabled(false);
-						airResistanceLabel.setEnabled(false);
-						accelerationLabel.setEnabled(false);
-						velocityTextField.setEnabled(false);
-						massTextField.setEnabled(false);
-						accelerationTextField.setEnabled(false);
-						angleTextField.setEnabled(false);
-						airResistanceTextField.setEnabled(false);
-					}
-					else {
-						if(frame.choice == 3) {
-							velocityLabel.setEnabled(false);
-							massLabel.setEnabled(false);
-							angleLabel.setEnabled(false);
-							velocityTextField.setEnabled(false);
-							massTextField.setEnabled(false);
-							angleTextField.setEnabled(false);
+					try {
+						double velocity = Double.parseDouble(velocityTextField.getText());
+						double acceleration = Double.parseDouble(accelerationTextField.getText());
+						double angle = Double.parseDouble(angleTextField.getText());
+						double airResistance = Double.parseDouble(airResistanceTextField.getText());
+						double mass = Double.parseDouble(massTextField.getText());
+						if(angle>90 || angle<0 || airResistance <= 0) {
+							throw new NumberFormatException();
 						}
-						else {
+						if(frame.choice == 4) {
 							velocityLabel.setEnabled(false);
 							massLabel.setEnabled(false);
 							angleLabel.setEnabled(false);
 							airResistanceLabel.setEnabled(false);
+							accelerationLabel.setEnabled(false);
 							velocityTextField.setEnabled(false);
 							massTextField.setEnabled(false);
+							accelerationTextField.setEnabled(false);
 							angleTextField.setEnabled(false);
 							airResistanceTextField.setEnabled(false);
 						}
+						else {
+							if(frame.choice == 3) {
+								velocityLabel.setEnabled(false);
+								massLabel.setEnabled(false);
+								angleLabel.setEnabled(false);
+								velocityTextField.setEnabled(false);
+								massTextField.setEnabled(false);
+								angleTextField.setEnabled(false);
+							}
+							else {
+								velocityLabel.setEnabled(false);
+								massLabel.setEnabled(false);
+								angleLabel.setEnabled(false);
+								airResistanceLabel.setEnabled(false);
+								velocityTextField.setEnabled(false);
+								massTextField.setEnabled(false);
+								angleTextField.setEnabled(false);
+								airResistanceTextField.setEnabled(false);
+							}
+						}
+						trajectory = new TrajectoryClass(acceleration, angle, mass, velocity, airResistance, frame, frame.currentLocale);
+						trajectoryIsPresent = true;
+						
+						trajectory.calculate();
+						
+					}catch(NumberFormatException e) {
+						JOptionPane.showMessageDialog(frame, messages.getString("dataerror"), "Error!", JOptionPane.ERROR_MESSAGE);
+						
 					}
-					trajectory = new TrajectoryClass(acceleration, angle, mass, velocity, airResistance, frame, frame.currentLocale);
-					trajectoryIsPresent = true;
-
-					trajectory.calculate();
 				}
 				else {
 					if(trajectory.getIsCanceled() == false) {

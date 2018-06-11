@@ -5,12 +5,10 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,23 +17,20 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
-import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtilities;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class MainFrame extends JFrame {
 
@@ -88,8 +83,8 @@ public class MainFrame extends JFrame {
 		backItem = new JMenuItem (messages.getString("back"));
 		aboutItem = new JMenuItem (messages.getString("about"));
 		newItem = new JMenuItem (messages.getString("new"));
-		exportChart = new JMenuItem("chart");
-		exportData = new JMenuItem("data");
+		exportChart = new JMenuItem(messages.getString("chart"));
+		exportData = new JMenuItem(messages.getString("data"));
 		menu.add(newItem);
 		menu.add(importItem);
 		menu.add(exportItem);
@@ -203,7 +198,7 @@ public class MainFrame extends JFrame {
 				if(returnVal == JFileChooser.APPROVE_OPTION) {
 				       
 				if(TrajectoryClass.chart == null) {
-						JOptionPane.showMessageDialog(MainFrame.this, "Brak wykresu", "Error!", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(MainFrame.this, messages.getString("charterror"), "Error!", JOptionPane.ERROR_MESSAGE);
 
 				}
 				else {
@@ -235,11 +230,16 @@ public class MainFrame extends JFrame {
 							String line = bfr.readLine();
 							StringTokenizer tokenizer = new StringTokenizer(line);
 							
-							LineEndPanel.massTextField.setText(tokenizer.nextToken());
-							LineEndPanel.accelerationTextField.setText(tokenizer.nextToken());
-							LineEndPanel.angleTextField.setText(tokenizer.nextToken());
 							LineEndPanel.velocityTextField.setText(tokenizer.nextToken());
-							LineEndPanel.airResistanceTextField.setText(tokenizer.nextToken());
+							LineEndPanel.massTextField.setText(tokenizer.nextToken());
+							LineEndPanel.angleTextField.setText(tokenizer.nextToken());
+							
+							if(LineEndPanel.accelerationTextField.isEnabled()) {								
+								LineEndPanel.accelerationTextField.setText(tokenizer.nextToken());
+							}
+							if(LineEndPanel.airResistanceTextField.isEnabled()) {
+								LineEndPanel.airResistanceTextField.setText(tokenizer.nextToken());
+							}
 						
 							bfr.close();
 						} catch (FileNotFoundException e1) {
@@ -265,6 +265,14 @@ public class MainFrame extends JFrame {
 				JOptionPane.showMessageDialog(MainFrame.this, "<html><center>" + credits  + messages.getString("aboutdialog") , messages.getString("aboutdialogtitle"), JOptionPane.PLAIN_MESSAGE);
 			}
 		});
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel");
+            getRootPane().getActionMap().put("Cancel", new AbstractAction(){
+                public void actionPerformed(ActionEvent e)
+                {
+                    System.exit(1);
+                }
+            });
 	}
 
 	public MainFrame(GraphicsConfiguration arg0) {
