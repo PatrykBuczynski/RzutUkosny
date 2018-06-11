@@ -3,12 +3,17 @@ package planetsFrame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 
@@ -62,6 +67,14 @@ public class StartPageFrame extends JFrame {
 		newPlanetButton.addActionListener(new NewPlanetButtonActionListener());
 		plLangButton.addActionListener(new PlLangButtonActionListener());
 		engLangButton.addActionListener(new EngLangButtonActionListener());
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel"); 
+            getRootPane().getActionMap().put("Cancel", new AbstractAction(){
+                public void actionPerformed(ActionEvent e)
+                {
+                    System.exit(1);
+                }
+            });
 		
 		this.setVisible(true);
 	}
@@ -160,6 +173,7 @@ public class StartPageFrame extends JFrame {
 
 		}
 	}
+	
 	
 	public static void main(String[] args) {
 		

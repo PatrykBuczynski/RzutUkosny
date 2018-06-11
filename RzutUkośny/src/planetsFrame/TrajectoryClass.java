@@ -95,7 +95,7 @@ public class TrajectoryClass {
 				protected Void doInBackground() throws Exception {
 					// TODO Auto-generated method stub
 					do {
-						//System.out.println(xPosition.size() + " " + yPosition.size());
+
 						xPosition.add(xPosition.get(xPosition.size() - 1) + 0.001);
 						ksi = betaFactor * xPosition.get(xPosition.size() - 1) / xVelocity; // zastosowano podstawienie w celu uproszczenia wzoru
 						yPosition.add((yVelocity/betaFactor + eta)* ksi + (eta*Math.log(1.0 - ksi)));
@@ -107,7 +107,7 @@ public class TrajectoryClass {
 						series.add(xPosition.get(xPosition.size() - 1), yPosition.get(yPosition.size() - 1));
 						
 						
-						//System.out.println(xPosition.get(xPosition.size() - 1) + ", " + yPosition.get(yPosition.size() - 1));
+
 						frame.validate();
 						Thread.sleep(1);
 						
@@ -176,7 +176,6 @@ public class TrajectoryClass {
 				protected Void doInBackground() throws Exception {
 					// TODO Auto-generated method stub
 					do {
-						//System.out.println(xPosition.size() + " " + yPosition.size());
 						xPosition.add(xPosition.get(xPosition.size() - 1) + 0.001);
 						ksi = betaFactor * xPosition.get(xPosition.size() - 1) / xVelocity; // zastosowano podstawienie w celu uproszczenia wzoru
 						yPosition.add((yVelocity/betaFactor + eta)* ksi + (eta*Math.log(1.0 - ksi)));
@@ -188,7 +187,6 @@ public class TrajectoryClass {
 						series.add(xPosition.get(xPosition.size() - 1), yPosition.get(yPosition.size() - 1));
 						
 						
-						//System.out.println(xPosition.get(xPosition.size() - 1) + ", " + yPosition.get(yPosition.size() - 1));
 						frame.validate();
 						Thread.sleep(1);
 						
