@@ -134,12 +134,12 @@ public class MainFrame extends JFrame {
 					MainFrame planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 				}
 				if(MainFrame.this.choice == 4) {
-					double mass = 10;
-					double acceleration = 1.62;
-					double angle = 45;
-					double velocity = 10;
-					double airResistance = 0.0001;
-					final int choice = 3;
+					double mass = 0.0;
+					double acceleration = 0.0;
+					double angle = 0.0;
+					double velocity = 0.0;
+					double airResistance = 0.0;
+					final int choice = 4;
 					MainFrame planetFrame = new MainFrame(currentLocale, acceleration, mass, velocity, angle, airResistance, choice);
 				}
 				MainFrame.this.dispose();
@@ -169,10 +169,10 @@ public class MainFrame extends JFrame {
 					try {
 						FileWriter fw = new FileWriter(file);
 						BufferedWriter bw = new BufferedWriter(fw);
-						int sz = TrajectoryClass.getxPosition().size();
+						int s = TrajectoryClass.getxPosition().size();
 						bw.write("xPosition || yPositition");
 						bw.newLine();
-						for(int i=0; i<sz; i++) {
+						for(int i=0; i<s; i++) {
 							bw.write(TrajectoryClass.getxPosition().get(i).toString() + " || " + TrajectoryClass.getyPosition().get(i).toString());
 							bw.newLine();
 						}

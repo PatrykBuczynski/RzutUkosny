@@ -2,7 +2,6 @@ package planetsFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
